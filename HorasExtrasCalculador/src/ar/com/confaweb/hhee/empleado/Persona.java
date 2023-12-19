@@ -87,4 +87,8 @@ public abstract class Persona {
 				+ ", dni=" + dni + "]";
 	}
 
+
+
+	
+
 }
