@@ -12,15 +12,13 @@ public abstract class Persona {
 	protected Integer edad;
 	protected Integer dni;
 
-	public Persona(String nombre,String apellido,Integer dni,Integer edad,LocalDate fechaNac ) {
-		this.nombre=nombre;
-		this.apellido=apellido;
-		this.dni=dni;
-		this.edad=edad;
-		this.fechaNac=fechaNac;
+	public Persona(String nombre, String apellido, Integer dni, Integer edad, LocalDate fechaNac) {
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.dni = dni;
+		this.edad = edad;
+		this.fechaNac = fechaNac;
 	}
-
-	
 
 	public String getNombre() {
 		return nombre;
@@ -61,7 +59,11 @@ public abstract class Persona {
 	public void setDni(Integer dni) {
 		this.dni = dni;
 	}
-	public abstract Boolean registrarHhee(HoraExtra hhee);
+
+	public abstract void cargarLicCompensatoriaPorHoraSobrefranco();
+
+	public abstract Integer calcularTotalHorasPorMes(LocalDate mes);
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(dni);
@@ -79,16 +81,10 @@ public abstract class Persona {
 		return Objects.equals(dni, other.dni);
 	}
 
-
-
 	@Override
 	public String toString() {
 		return "Persona [nombre=" + nombre + ", apellido=" + apellido + ", fechaNac=" + fechaNac + ", edad=" + edad
 				+ ", dni=" + dni + "]";
 	}
-
-
-
-	
 
 }

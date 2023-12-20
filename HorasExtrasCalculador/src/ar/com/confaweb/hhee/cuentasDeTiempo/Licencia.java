@@ -18,6 +18,10 @@ public class Licencia {
 		this.motivo = motivo;
 		
 	}
+	public Licencia(Integer cantidad,Motivo motivo) {
+		this.cantidad=cantidad;
+		this.motivo=motivo;
+	}
 
 	public String getDescripcion() {
 		return descripcion;
@@ -49,6 +53,12 @@ public class Licencia {
 
 	public void setMotivo(Motivo motivo) {
 		this.motivo = motivo;
+	}
+	public Integer  sumarCantidad(Integer cantidad2) {
+		Integer cantidadActual=this.getCantidad();
+		cantidadActual+=cantidad2;
+		this.setCantidad(cantidadActual);
+		return this.getCantidad();
 	}
 
 	

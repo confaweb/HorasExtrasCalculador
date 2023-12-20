@@ -13,10 +13,12 @@ import ar.com.confaweb.hhee.cuentasDeTiempo.Licencia;
 import ar.com.confaweb.hhee.dominio.HoraExtra;
 import ar.com.confaweb.hhee.enums.Categoria;
 import ar.com.confaweb.hhee.enums.HoraTipo;
+import ar.com.confaweb.hhee.enums.Motivo;
 import ar.com.confaweb.hhee.exceptions.FaltaINgresarDatosDElEmpleadoException;
 import ar.com.confaweb.hhee.exceptions.NoSeRegistranHorasExtrasEnLaFechaException;
+import ar.com.confaweb.hhee.interfaces.HorasYLicencias;
 
-public class Empleado extends Persona {
+public class Empleado extends Persona implements HorasYLicencias {
 
 	private Integer registroEmpl;
 	private Categoria categoria;
@@ -106,24 +108,28 @@ public class Empleado extends Persona {
 	}
 
 	public boolean datosValidados() throws FaltaINgresarDatosDElEmpleadoException {
-		Boolean datosValidados = false;
-		if ( this.edadValidada() &&  this.fechaIngreso.isBefore(LocalDate.now())) {
-			datosValidados = true;
-			return datosValidados;
-
-		} else
-
+		if (edadValidada() && fechaIngresoValida()) {
+			return true;
+		} else {
 			throw new FaltaINgresarDatosDElEmpleadoException("Datos del empleado sin ingresar");
+		}
 	}
 
-
 	private boolean edadValidada() {
-		Boolean esMayor = false;
-		if (this.edad>=18)
-			esMayor = true;
-		else
-			esMayor = false;
-		return esMayor;
+		Boolean mayor = false;
+		if (calcularEdad() >= 18)
+			mayor = true;
+		return mayor;
+	}
+
+	private boolean fechaIngresoValida() {
+		return fechaIngreso.isBefore(LocalDate.now());
+	}
+
+	private int calcularEdad() {
+		Integer edad = 0;
+		edad = LocalDate.now().getYear() - fechaNac.getYear();
+		return edad;
 	}
 
 	public Integer consultarHHEEPorFecha(LocalDate fecha) throws NoSeRegistranHorasExtrasEnLaFechaException {
@@ -159,14 +165,6 @@ public class Empleado extends Persona {
 		return licenciaRegistrada;
 
 	}
-
-	public Integer consultarHheePorFecha(LocalDate fechaConsulta) {
-		return 10;
-
-	}
-
-	@Override
-
 	public Boolean registrarHhee(HoraExtra hhee) {
 		Boolean horaRegistrada = false;
 		horaRegistrada = registroDeHoras.add(hhee);
@@ -174,6 +172,28 @@ public class Empleado extends Persona {
 		return horaRegistrada;
 
 	}
+
+	@Override
+	public Integer calcularTotalHorasPorMes(LocalDate mes) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void cargarLicCompensatoriaPorHoraSobrefranco() {
+		for (HoraExtra hhee : registroDeHoras) {
+			Integer cantidad = 6;
+			Licencia licenciaCompensatoria = new Licencia(cantidad, Motivo.DESCANSO_COMPENSATORIO);
+			if (hhee.getTipo().equals(HoraTipo.COMPENSATORIA)) {
+				cantidad = hhee.getCantidadHhee();
+				licenciaCompensatoria.sumarCantidad(cantidad);
+				registroLicencias.add(licenciaCompensatoria);
+			}        
+		}
+
+	}
+
+	
 
 	@Override
 	public int hashCode() {

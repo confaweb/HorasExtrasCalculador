@@ -20,8 +20,11 @@ public class HoraExtra {
 		this.horaFin=horaFin;
 		this.fechaHhee=fechaHhee;
 		this.motivo=motivo;
-		this.setTipo(tipo);
+		this.tipo=tipo;
 	}
+	public HoraExtra(Integer cantidadHhee) {
+		this.cantidadHhee=cantidadHhee;
+		}
 
 	public Integer getCantidadHhee() {
 		return cantidadHhee;
