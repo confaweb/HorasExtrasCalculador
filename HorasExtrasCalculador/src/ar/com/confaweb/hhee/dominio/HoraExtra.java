@@ -15,16 +15,15 @@ public class HoraExtra {
 	private LocalTime horaInicio;
 	private LocalTime horaFin;
 
-	public HoraExtra(LocalTime horaInicio,LocalTime horaFin, LocalDate fechaHhee, HoraTipo tipo,Motivo motivo) {
+	public HoraExtra(LocalTime horaInicio,LocalTime horaFin, LocalDate fechaHhee, HoraTipo tipo,Motivo motivo,Integer cantidadHhee) {
 		this.horaInicio=horaInicio;
 		this.horaFin=horaFin;
 		this.fechaHhee=fechaHhee;
 		this.motivo=motivo;
 		this.tipo=tipo;
-	}
-	public HoraExtra(Integer cantidadHhee) {
 		this.cantidadHhee=cantidadHhee;
-		}
+	}
+	
 
 	public Integer getCantidadHhee() {
 		return cantidadHhee;

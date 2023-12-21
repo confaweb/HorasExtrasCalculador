@@ -19,7 +19,7 @@ import ar.com.confaweb.hhee.exceptions.NoSeRegistranHorasExtrasEnLaFechaExceptio
 import ar.com.confaweb.hhee.interfaces.HorasYLicencias;
 
 public class Empleado extends Persona implements HorasYLicencias {
-
+	private final Double VALOR_HORA_BASICO = 1000.00;
 	private Integer registroEmpl;
 	private Categoria categoria;
 	private Double valorHora;
@@ -88,17 +88,15 @@ public class Empleado extends Persona implements HorasYLicencias {
 		return registroLicencias;
 	}
 
+	public Double getVALOR_HORA_BASICO() {
+		return VALOR_HORA_BASICO;
+	}
+
 	public void setRegistroLicencias(List<Licencia> registroLicencias) {
 		this.registroLicencias = registroLicencias;
 	}
 
-	public Integer calcularHorasExtrasDelDiaPorFecha(LocalDate dia) {
-		Integer cantidadHoras = 0;
-
-		cantidadHoras = this.getRegistroDeHoras().get(dia.getDayOfMonth() - 1).getHoraFin().getHour()
-				- this.getRegistroDeHoras().get(dia.getDayOfMonth() - 1).getHoraInicio().getHour();
-		return cantidadHoras;
-	}
+	
 
 	public Integer calcularHorasExtrasDelDia(LocalTime horaFin, LocalTime horaInicio) {
 		Integer cantidadHoras = 0;
@@ -130,6 +128,15 @@ public class Empleado extends Persona implements HorasYLicencias {
 		Integer edad = 0;
 		edad = LocalDate.now().getYear() - fechaNac.getYear();
 		return edad;
+	}
+	public Integer calcularHorasExtrasDelDiaPorFecha(LocalDate dia) {
+		Integer cantidadHoras = 0;
+		for (HoraExtra horaExtra : registroDeHoras) {
+			if (horaExtra.getFechaHhee().equals(dia)) {
+			}
+			cantidadHoras = horaExtra.getHoraFin().getHour() - horaExtra.getHoraInicio().getHour();
+		}
+		return cantidadHoras;
 	}
 
 	public Integer consultarHHEEPorFecha(LocalDate fecha) throws NoSeRegistranHorasExtrasEnLaFechaException {
@@ -165,6 +172,7 @@ public class Empleado extends Persona implements HorasYLicencias {
 		return licenciaRegistrada;
 
 	}
+
 	public Boolean registrarHhee(HoraExtra hhee) {
 		Boolean horaRegistrada = false;
 		horaRegistrada = registroDeHoras.add(hhee);
@@ -182,18 +190,23 @@ public class Empleado extends Persona implements HorasYLicencias {
 	@Override
 	public void cargarLicCompensatoriaPorHoraSobrefranco() {
 		for (HoraExtra hhee : registroDeHoras) {
-			Integer cantidad = 6;
-			Licencia licenciaCompensatoria = new Licencia(cantidad, Motivo.DESCANSO_COMPENSATORIO);
+			Integer cantidad = 0;
 			if (hhee.getTipo().equals(HoraTipo.COMPENSATORIA)) {
 				cantidad = hhee.getCantidadHhee();
-				licenciaCompensatoria.sumarCantidad(cantidad);
-				registroLicencias.add(licenciaCompensatoria);
-			}        
+				sumarHorasCompensatorias(cantidad);
+
+			}
 		}
 
 	}
 
-	
+	private void sumarHorasCompensatorias(Integer cantidad) {
+		for (Licencia licencia : registroLicencias) {
+			if (licencia.getMotivo().equals(Motivo.DESCANSO_COMPENSATORIO))
+				licencia.sumarCantidad(cantidad);
+		}
+
+	}
 
 	@Override
 	public int hashCode() {
@@ -213,6 +226,46 @@ public class Empleado extends Persona implements HorasYLicencias {
 			return false;
 		Empleado other = (Empleado) obj;
 		return Objects.equals(registroEmpl, other.registroEmpl);
+	}
+
+	@Override
+	public Double calcularValorHoraPorCategoria() {
+		switch (categoria) {
+		case A: {
+
+			valorHora = VALOR_HORA_BASICO + VALOR_HORA_BASICO * .2;
+			break;
+		}
+		case B: {
+
+			valorHora = VALOR_HORA_BASICO + VALOR_HORA_BASICO * .5;
+			break;
+		}
+		case B1: {
+
+			valorHora = VALOR_HORA_BASICO + VALOR_HORA_BASICO * .6;
+			break;
+		}
+		case C: {
+
+			valorHora = VALOR_HORA_BASICO + VALOR_HORA_BASICO * .9;
+			break;
+		}
+		case C1: {
+
+			valorHora = VALOR_HORA_BASICO + VALOR_HORA_BASICO * .95;
+			break;
+		}
+		case D: {
+
+			valorHora = VALOR_HORA_BASICO + VALOR_HORA_BASICO * 2;
+			break;
+		}
+
+		default:
+			throw new IllegalArgumentException("Unexpected value: " + categoria);
+		}
+		return valorHora;
 	}
 
 }
