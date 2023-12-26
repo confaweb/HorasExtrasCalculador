@@ -72,6 +72,11 @@ public class HoraExtra {
 	public void setHoraFin(LocalTime horaFin) {
 		this.horaFin = horaFin;
 	}
+	public Integer calcularCantidad() {
+		Integer cantidad=0;
+		cantidad=(int) ((this.horaFin.getHour()-this.horaInicio.getHour())+.5);
+		return cantidad;
+	}
 
 	
 

@@ -14,7 +14,10 @@ import ar.com.confaweb.hhee.dominio.HoraExtra;
 import ar.com.confaweb.hhee.enums.Categoria;
 import ar.com.confaweb.hhee.enums.HoraTipo;
 import ar.com.confaweb.hhee.enums.Motivo;
+import ar.com.confaweb.hhee.exceptions.CantidadLicenciaSolicitadaMayorASaldoException;
 import ar.com.confaweb.hhee.exceptions.FaltaINgresarDatosDElEmpleadoException;
+import ar.com.confaweb.hhee.exceptions.LicenciaSinSaldoException;
+import ar.com.confaweb.hhee.exceptions.NoSeRegistranHorasExtrasEnElMesException;
 import ar.com.confaweb.hhee.exceptions.NoSeRegistranHorasExtrasEnLaFechaException;
 import ar.com.confaweb.hhee.interfaces.HorasYLicencias;
 
@@ -96,8 +99,6 @@ public class Empleado extends Persona implements HorasYLicencias {
 		this.registroLicencias = registroLicencias;
 	}
 
-	
-
 	public Integer calcularHorasExtrasDelDia(LocalTime horaFin, LocalTime horaInicio) {
 		Integer cantidadHoras = 0;
 		cantidadHoras = horaFin.getHour() - horaInicio.getHour();
@@ -129,22 +130,16 @@ public class Empleado extends Persona implements HorasYLicencias {
 		edad = LocalDate.now().getYear() - fechaNac.getYear();
 		return edad;
 	}
-	public Integer calcularHorasExtrasDelDiaPorFecha(LocalDate dia) {
-		Integer cantidadHoras = 0;
-		for (HoraExtra horaExtra : registroDeHoras) {
-			if (horaExtra.getFechaHhee().equals(dia)) {
-			}
-			cantidadHoras = horaExtra.getHoraFin().getHour() - horaExtra.getHoraInicio().getHour();
-		}
-		return cantidadHoras;
-	}
+
+	// ************CONSULTA DE HORAS EXTRA SEGUN DISTINTAS
+	// REFERENCIAS***********************
 
 	public Integer consultarHHEEPorFecha(LocalDate fecha) throws NoSeRegistranHorasExtrasEnLaFechaException {
 		Integer sumatoria = 0;
 		Integer cantidadHoras = 0;
 		for (HoraExtra hhee : this.registroDeHoras) {
 			if (hhee.getFechaHhee().equals(fecha)) {
-				cantidadHoras = (hhee.getHoraFin().getHour()) - (hhee.getHoraInicio().getHour());
+				cantidadHoras = hhee.getCantidadHhee();
 				sumatoria += cantidadHoras;
 			}
 		}
@@ -154,6 +149,38 @@ public class Empleado extends Persona implements HorasYLicencias {
 			throw new NoSeRegistranHorasExtrasEnLaFechaException("Fecha sin Registro de HHEE");
 
 	}
+
+	public Integer consultarHHEEPorMesNumero(Integer mesNumero) throws NoSeRegistranHorasExtrasEnElMesException {
+		Integer sumatoria = 0;
+		Integer cantidadHoras = 0;
+		for (HoraExtra hhee : this.registroDeHoras) {
+			if (hhee.getFechaHhee().getMonthValue() == mesNumero) {
+				cantidadHoras = hhee.getCantidadHhee();
+				sumatoria += cantidadHoras;
+			}
+		}
+		if (sumatoria != 0)
+			return sumatoria;
+		else
+			throw new NoSeRegistranHorasExtrasEnElMesException("Mes sin Registro de HHEE");
+	}
+
+	public Integer consultarHHEEPorMesNombreEnglish(String mesNombre) throws NoSeRegistranHorasExtrasEnElMesException {
+		Integer sumatoria = 0;
+		Integer cantidadHoras = 0;
+		for (HoraExtra hhee : this.registroDeHoras) {
+			if (hhee.getFechaHhee().getMonth().toString().equalsIgnoreCase(mesNombre)) {
+				cantidadHoras = hhee.getCantidadHhee();
+				sumatoria += cantidadHoras;
+			}
+		}
+		if (sumatoria != 0)
+			return sumatoria;
+		else
+			throw new NoSeRegistranHorasExtrasEnElMesException("Mes sin Registro de HHEE");
+	}
+
+	// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 	public Integer sumarHhee() {
 		Integer sumatoria = 0;
@@ -179,6 +206,43 @@ public class Empleado extends Persona implements HorasYLicencias {
 
 		return horaRegistrada;
 
+	}
+
+	public void consumirLicencia(Motivo motivo, LocalDate fechaInicioLicencia, LocalDate fechaFinLicencia)
+			throws LicenciaSinSaldoException, CantidadLicenciaSolicitadaMayorASaldoException {
+		Integer cantidad_Dias_Disponiibles = 0, cantidad_DiasLicenciaATomar = 0, saldo = 0;
+		cantidad_Dias_Disponiibles = consultarSaldoLicencia(motivo);
+		cantidad_DiasLicenciaATomar = calcularCantidadDiasLicenciaPorFecha(fechaInicioLicencia, fechaFinLicencia);
+		saldo = cantidad_Dias_Disponiibles - cantidad_DiasLicenciaATomar;
+		if (cantidad_Dias_Disponiibles == 0)
+			throw new LicenciaSinSaldoException("sin saldo de Licencia");
+		if (cantidad_DiasLicenciaATomar < cantidad_Dias_Disponiibles)
+
+			for (Licencia licencia : registroLicencias) {
+				if (licencia.getMotivo().equals(motivo))
+					licencia.setCantidad(saldo);
+			}
+		else
+			throw new CantidadLicenciaSolicitadaMayorASaldoException(
+					"Se ha solicitado cantidad de licencia mayor a saldo disponible");
+
+	}
+
+	private Integer consultarSaldoLicencia(Motivo motivo) {
+		Integer cantidad_Dias = 0;
+		for (Licencia licencia : registroLicencias) {
+			if (licencia.getMotivo().equals(motivo))
+				cantidad_Dias = licencia.getCantidad();
+		}
+
+		return cantidad_Dias;
+	}
+
+	private Integer calcularCantidadDiasLicenciaPorFecha(LocalDate fechaInicioLicencia, LocalDate fechaFinLicencia) {
+		Integer cantidad_Dias_Licencia = 0;
+		cantidad_Dias_Licencia = fechaFinLicencia.getDayOfYear() - fechaInicioLicencia.getDayOfYear();
+
+		return cantidad_Dias_Licencia;
 	}
 
 	@Override
@@ -266,6 +330,51 @@ public class Empleado extends Persona implements HorasYLicencias {
 			throw new IllegalArgumentException("Unexpected value: " + categoria);
 		}
 		return valorHora;
+	}
+
+	public Integer calcularAntiguedad() {
+		Integer antiguedad = 0;
+		antiguedad = LocalDate.now().getYear() - this.fechaIngreso.getYear();
+		return antiguedad;
+	}
+
+	public Integer actualizarSaldoVacaciones() {
+
+		LocalDate fechaActualizacion = getFechaActualizacion();
+		Integer saldoActualizado = 0;
+		saldoActualizado = calcucarCantidadVacacionesSegunAnmatiguedad();
+
+		for (Licencia licencia : registroLicencias) {
+			if (licencia.getMotivo().equals(Motivo.VACACIONES))
+				saldoActualizado += licencia.getCantidad();
+		}
+
+		return saldoActualizado;
+	}
+
+	private LocalDate getFechaActualizacion() {
+		Integer anioActual = LocalDate.now().getYear();
+		LocalDate fechaActualizacion = LocalDate.of(anioActual, 10, 01);
+		return fechaActualizacion;
+	}
+
+	private Integer calcucarCantidadVacacionesSegunAnmatiguedad() {
+		Integer cantidad_Dias = 0, antiguedad = 0;
+		antiguedad = calcularAntiguedad();
+		if (antiguedad <= 1)
+			cantidad_Dias = 7;
+		else if (antiguedad > 1 && antiguedad <= 5)
+			cantidad_Dias = 14;
+		else if (antiguedad > 5 && antiguedad <= 10)
+			cantidad_Dias = 21;
+		else if (antiguedad > 10 && antiguedad <= 15)
+			cantidad_Dias = 28;
+		else
+
+			cantidad_Dias = 35;
+
+		return cantidad_Dias;
+
 	}
 
 }
