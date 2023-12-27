@@ -29,7 +29,7 @@ public class TestCases {
 	public void registrarHoraExtra() {
 //		PREPARACION
 		String nombreEmp = "Julian", apellidoEmp = "Rooswell";
-		Integer dni = 111111, registroEmpl = 000001, cantidadHhee = 6, edad = 33;
+		Integer dni = 111111, registroEmpl = 000001, cantidadHhee = 6;
 		Categoria categoria = Categoria.A;
 		Motivo motivo = Motivo.VACACIONES;
 		HoraTipo tipo = HoraTipo.DIURNA;
@@ -39,7 +39,7 @@ public class TestCases {
 		LocalTime horaInicio = LocalTime.of(06, 00), horaFin = LocalTime.of(12, 00);
 //		EJECUCION
 		HoraExtra hhee = new HoraExtra(horaInicio, horaFin, fechaHhee, tipo, motivo, cantidadHhee);
-		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, edad, fechaNac, categoria,
+		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria,
 				valorHora, fechaIngreso);
 		((Empleado) empleado1).registrarHhee(hhee);
 
@@ -52,7 +52,7 @@ public class TestCases {
 //		PREPARACION
 
 		String nombreEmp = "Julian", apellidoEmp = "Rooswell";
-		Integer dni = 111111, registroEmpl = 000001, cantidadHhee = 6, edad = 33;
+		Integer dni = 111111, registroEmpl = 000001, cantidadHhee = 6;
 		Categoria categoria = Categoria.A;
 		Motivo motivo = Motivo.VACACIONES, motivo1 = Motivo.VACACIONES;
 		HoraTipo tipo = HoraTipo.DIURNA, tipo1 = HoraTipo.DIURNA;
@@ -65,7 +65,7 @@ public class TestCases {
 //		EJECUCION
 		HoraExtra hhee = new HoraExtra(horaInicio, horaFin, fechaHhee, tipo, motivo, cantidadHhee);
 		HoraExtra hhee1 = new HoraExtra(horaInicio, horaFin, fechaHhee1, tipo1, motivo1, cantidadHhee);
-		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, edad, fechaNac, categoria,
+		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria,
 				valorHora, fechaIngreso);
 		// ArrayList<HoraExtra> registroHhee=new ArrayList<HoraExtra>();
 		((Empleado) empleado1).registrarHhee(hhee);
@@ -84,7 +84,7 @@ public class TestCases {
 //		PREPARACION
 
 		String nombreEmp = "Julian", apellidoEmp = "Rooswell", descripcion = "vacaciones sin adelanto", codigo = "vv01";
-		Integer dni = 111111, registroEmpl = 000001, cantidad = 6, edad = 33;
+		Integer dni = 111111, registroEmpl = 000001, cantidad = 6;
 		Categoria categoria = Categoria.A;
 		Motivo motivo = Motivo.VACACIONES, motivo1 = Motivo.VACACIONES;
 		HoraTipo tipo = HoraTipo.DIURNA, tipo1 = HoraTipo.DIURNA;
@@ -98,7 +98,7 @@ public class TestCases {
 //		EJECUCION
 		HoraExtra hhee = new HoraExtra(horaInicio, horaFin, fechaHhee, tipo, motivo, cantidad);
 		HoraExtra hhee1 = new HoraExtra(horaInicio, horaFin, fechaHhee1, tipo1, motivo1, cantidad);
-		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, edad, fechaNac, categoria,
+		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria,
 				valorHora, fechaIngreso);
 		Licencia licencia = new Licencia(descripcion, codigo, cantidad, motivo, unidad);
 		// ArrayList<HoraExtra> registroHhee=new ArrayList<HoraExtra>();
@@ -115,7 +115,7 @@ public class TestCases {
 //		PREPARACION
 
 		String nombreEmp = "Julian", apellidoEmp = "Rooswell", descripcion = "vacaciones sin adelanto", codigo = "vv01";
-		Integer dni = 111111, registroEmpl = 000001, cantidad = 6, edad = 33;
+		Integer dni = 111111, registroEmpl = 000001, cantidad = 6;
 		Categoria categoria = Categoria.A;
 		Motivo motivo = Motivo.VACACIONES, motivo1 = Motivo.VACACIONES;
 		HoraTipo tipo = HoraTipo.DIURNA, tipo1 = HoraTipo.DIURNA;
@@ -128,7 +128,7 @@ public class TestCases {
 //		EJECUCION
 		HoraExtra hhee = new HoraExtra(horaInicio, horaFin, fechaHhee, tipo, motivo, cantidad);
 		HoraExtra hhee1 = new HoraExtra(horaInicio, horaFin, fechaHhee1, tipo1, motivo1, cantidad);
-		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, edad, fechaNac, categoria,
+		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria,
 				valorHora, fechaIngreso);
 
 		((Empleado) empleado1).registrarHhee(hhee1);
@@ -147,20 +147,20 @@ public class TestCases {
 //		PREPARACION
 
 		String nombreEmp = "Julian", apellidoEmp = "Rooswell", descripcion = "vacaciones sin adelanto", codigo = "vv01";
-		Integer dni = 111111, registroEmpl = 000001, cantidad = 6, edad = 20;
+		Integer dni = 111111, registroEmpl = 000001, cantidad = 6;
 		Categoria categoria = Categoria.A;
 		Motivo motivo = Motivo.VACACIONES, motivo1 = Motivo.VACACIONES;
 		HoraTipo tipo = HoraTipo.DIURNA, tipo1 = HoraTipo.DIURNA;
 		LocalTime horaInicio = LocalTime.of(06, 00), horaFin = LocalTime.of(12, 00);
 		Double valorHora = 1000.00;
-		LocalDate fecha = LocalDate.now(), fechaNac = LocalDate.of(2004, 10, 11),
+		LocalDate fecha = LocalDate.now(), fechaNac = LocalDate.of(2014, 10, 11),
 				fechaIngreso = LocalDate.of(2021, 01, 22), fechaHhee = LocalDate.of(22, 01, 10),
 				fechaHhee1 = LocalDate.of(22, 01, 11), fechaConsulta = LocalDate.of(22, 01, 11);
 
 //		EJECUCION
 		HoraExtra hhee = new HoraExtra(horaInicio, horaFin, fechaHhee, tipo, motivo, cantidad);
 		HoraExtra hhee1 = new HoraExtra(horaInicio, horaFin, fechaHhee1, tipo1, motivo1, cantidad);
-		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, edad, fechaNac, categoria,
+		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria,
 				valorHora, fechaIngreso);
 
 //		VALIDACION 
@@ -173,7 +173,7 @@ public class TestCases {
 //		PREPARACION
 
 		String nombreEmp = "Julian", apellidoEmp = "Rooswell", descripcion = "descanso compensatorio", codigo = "dc01";
-		Integer dni = 111111, registroEmpl = 000001, cantidad = 6, edad = 20;
+		Integer dni = 111111, registroEmpl = 000001, cantidad = 6;
 		Categoria categoria = Categoria.A;
 		Motivo motivo = Motivo.DESCANSO_COMPENSATORIO, motivo1 = Motivo.VACACIONES;
 		HoraTipo tipo = HoraTipo.COMPENSATORIA, tipo1 = HoraTipo.DIURNA;
@@ -187,7 +187,7 @@ public class TestCases {
 //		EJECUCION
 		HoraExtra hhee = new HoraExtra(horaInicio, horaFin, fechaHhee, tipo, motivo, cantidad);
 		HoraExtra hhee1 = new HoraExtra(horaInicio, horaFin, fechaHhee1, tipo1, motivo1, cantidad);
-		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, edad, fechaNac, categoria,
+		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria,
 				valorHora, fechaIngreso);
 
 		Licencia licencia = new Licencia(descripcion, codigo, cantidad, motivo, unidad);
@@ -208,7 +208,7 @@ public class TestCases {
 //		PREPARACION
 
 		String nombreEmp = "Julian", apellidoEmp = "Rooswell", descripcion = "descanso compensatorio", codigo = "dc01";
-		Integer dni = 111111, registroEmpl = 000001, cantidad = 6, edad = 20;
+		Integer dni = 111111, registroEmpl = 000001, cantidad = 6;
 		Categoria categoria = Categoria.A;
 		Motivo motivo = Motivo.DESCANSO_COMPENSATORIO, motivo1 = Motivo.VACACIONES;
 		HoraTipo tipo = HoraTipo.COMPENSATORIA, tipo1 = HoraTipo.DIURNA;
@@ -224,7 +224,7 @@ public class TestCases {
 //		EJECUCION
 		HoraExtra hhee = new HoraExtra(horaInicio, horaFin, fechaHhee, tipo, motivo, cantidad);
 		HoraExtra hhee1 = new HoraExtra(horaInicio, horaFin, fechaHhee1, tipo1, motivo1, cantidad);
-		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, edad, fechaNac, categoria,
+		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria,
 				valorHora, fechaIngreso);
 
 		Licencia licencia = new Licencia(descripcion, codigo, cantidad, motivo, unidad);
@@ -247,7 +247,7 @@ public class TestCases {
 //			PREPARACION
 
 		String nombreEmp = "Julian", apellidoEmp = "Rooswell", descripcion = "descanso compensatorio", codigo = "dc01";
-		Integer dni = 111111, registroEmpl = 000001, cantidad = 6, edad = 20, mesNumero = 01;
+		Integer dni = 111111, registroEmpl = 000001, cantidad = 6, mesNumero = 01;
 		Categoria categoria = Categoria.A;
 		Motivo motivo = Motivo.DESCANSO_COMPENSATORIO, motivo1 = Motivo.VACACIONES;
 		HoraTipo tipo = HoraTipo.COMPENSATORIA, tipo1 = HoraTipo.DIURNA;
@@ -261,7 +261,7 @@ public class TestCases {
 //			EJECUCION
 		HoraExtra hhee = new HoraExtra(horaInicio, horaFin, fechaHhee, tipo, motivo, cantidad);
 		HoraExtra hhee1 = new HoraExtra(horaInicio, horaFin, fechaHhee1, tipo1, motivo1, cantidad);
-		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, edad, fechaNac, categoria,
+		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria,
 				valorHora, fechaIngreso);
 
 		Licencia licencia = new Licencia(descripcion, codigo, cantidad, motivo, unidad);
@@ -286,7 +286,7 @@ public class TestCases {
 
 		String nombreEmp = "Julian", apellidoEmp = "Rooswell", descripcion = "descanso compensatorio", codigo = "dc01",
 				mesNombre = "january";
-		Integer dni = 111111, registroEmpl = 000001, cantidad = 6, edad = 20, mesNumero = 02;
+		Integer dni = 111111, registroEmpl = 000001, cantidad = 6, mesNumero = 02;
 		Categoria categoria = Categoria.A;
 		Motivo motivo = Motivo.DESCANSO_COMPENSATORIO, motivo1 = Motivo.VACACIONES;
 		HoraTipo tipo = HoraTipo.COMPENSATORIA, tipo1 = HoraTipo.DIURNA;
@@ -300,7 +300,7 @@ public class TestCases {
 //			EJECUCION
 		HoraExtra hhee = new HoraExtra(horaInicio, horaFin, fechaHhee, tipo, motivo, cantidad);
 		HoraExtra hhee1 = new HoraExtra(horaInicio, horaFin, fechaHhee1, tipo1, motivo1, cantidad);
-		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, edad, fechaNac, categoria,
+		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria,
 				valorHora, fechaIngreso);
 
 		Licencia licencia = new Licencia(descripcion, codigo, cantidad, motivo, unidad);
@@ -322,7 +322,7 @@ public class TestCases {
 //		PREPARACION
 
 		String nombreEmp = "Julian", apellidoEmp = "Rooswell", descripcion = "descanso compensatorio", codigo = "dc01";
-		Integer dni = 111111, registroEmpl = 000001, cantidad = 6, edad = 20;
+		Integer dni = 111111, registroEmpl = 000001, cantidad = 6;
 		Categoria categoria = Categoria.D;
 		Motivo motivo = Motivo.DESCANSO_COMPENSATORIO, motivo1 = Motivo.VACACIONES;
 		HoraTipo tipo = HoraTipo.DIURNA, tipo1 = HoraTipo.DIURNA;
@@ -337,7 +337,7 @@ public class TestCases {
 
 		HoraExtra hhee = new HoraExtra(horaInicio, horaFin, fechaHhee, tipo, motivo, cantidad);
 		HoraExtra hhee1 = new HoraExtra(horaInicio, horaFin, fechaHhee1, tipo1, motivo1, cantidad);
-		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, edad, fechaNac, categoria,
+		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria,
 				valorHora, fechaIngreso);
 		Licencia licencia = new Licencia(descripcion, codigo, cantidad, motivo, unidad);
 
@@ -353,7 +353,7 @@ public class TestCases {
 //		PREPARACION
 
 		String nombreEmp = "Julian", apellidoEmp = "Rooswell", descripcion = "descanso compensatorio", codigo = "dc01";
-		Integer dni = 111111, registroEmpl = 000001, cantidad = 6, edad = 20;
+		Integer dni = 111111, registroEmpl = 000001, cantidad = 6;
 		Categoria categoria = Categoria.D;
 		Motivo motivo = Motivo.DESCANSO_COMPENSATORIO, motivo1 = Motivo.VACACIONES;
 		HoraTipo tipo = HoraTipo.DIURNA, tipo1 = HoraTipo.DIURNA;
@@ -366,9 +366,8 @@ public class TestCases {
 
 //		EJECUCION
 
-		HoraExtra hhee = new HoraExtra(horaInicio, horaFin, fechaHhee, tipo, motivo, cantidad);
-		HoraExtra hhee1 = new HoraExtra(horaInicio, horaFin, fechaHhee1, tipo1, motivo1, cantidad);
-		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, edad, fechaNac, categoria,
+		
+		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria,
 				valorHora, fechaIngreso);
 		Licencia licencia = new Licencia(descripcion, codigo, cantidad, motivo, unidad);
 
@@ -385,7 +384,7 @@ public class TestCases {
 //		PREPARACION
 
 		String nombreEmp = "Julian", apellidoEmp = "Rooswell", descripcion = "descanso compensatorio", codigo = "dc01";
-		Integer dni = 111111, registroEmpl = 000001, cantidad = 6, edad = 20,anioActual=LocalDate.now().getYear();
+		Integer dni = 111111, registroEmpl = 000001, cantidad = 6,anioActual=LocalDate.now().getYear();
 		Categoria categoria = Categoria.D;
 		Motivo motivo = Motivo.VACACIONES, motivo1 = Motivo.VACACIONES;
 		HoraTipo tipo = HoraTipo.DIURNA, tipo1 = HoraTipo.DIURNA;
@@ -401,7 +400,7 @@ public class TestCases {
 
 		HoraExtra hhee = new HoraExtra(horaInicio, horaFin, fechaHhee, tipo, motivo, cantidad);
 		HoraExtra hhee1 = new HoraExtra(horaInicio, horaFin, fechaHhee1, tipo1, motivo1, cantidad);
-		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, edad, fechaNac, categoria,
+		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria,
 				valorHora, fechaIngreso);
 		Licencia licencia = new Licencia(descripcion, codigo, cantidad, motivo, unidad);
 		
@@ -413,6 +412,42 @@ public class TestCases {
 		assertEquals(ve, vo);
 
 	}
+	@Test // #12
+	public void queSePuedaOrdenarListaEmpleadosPorApellido() {
+//		PREPARACION
+
+		String nombreEmp = "Julian", apellidoEmp = "Rooswell",apellidoEmp1 = "Sooswell",apellidoEmp2 = "Tooswell" ,descripcion = "descanso compensatorio", codigo = "dc01";
+		Integer dni = 111111, registroEmpl = 000001, cantidad = 6,anioActual=LocalDate.now().getYear();
+		Categoria categoria = Categoria.D;
+		Motivo motivo = Motivo.VACACIONES, motivo1 = Motivo.VACACIONES;
+		HoraTipo tipo = HoraTipo.DIURNA, tipo1 = HoraTipo.DIURNA;
+		Unidad unidad = Unidad.DIA_LABORAL;
+		Double valorHora=0.0;
+		List <Empleado>registroEmpleados=new ArrayList<Empleado>();
+		
+		LocalDate fecha = LocalDate.now(), fechaNac = LocalDate.of(2004, 10, 11),
+				fechaIngreso = LocalDate.of(2000, 01, 22);
+
+//		EJECUCION
+
+		
+		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria,
+				valorHora, fechaIngreso);
+		Persona empleado2 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria,
+				valorHora, fechaIngreso);
+		Persona empleado3 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria,
+				valorHora, fechaIngreso);
+		//((Empleado) empleado1).ordenarListaEmpleados( registroEmpleados);
+		
+
+//		VALIDACION 
+
+		Empleado ve = (Empleado) empleado1;
+		Empleado vo =  registroEmpleados.get(0);
+		assertEquals(ve, vo);
+
+	}
+
 
 
 }

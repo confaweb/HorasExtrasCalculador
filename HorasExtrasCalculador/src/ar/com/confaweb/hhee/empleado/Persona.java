@@ -9,14 +9,12 @@ public abstract class Persona {
 	protected String nombre;
 	protected String apellido;
 	protected LocalDate fechaNac;
-	protected Integer edad;
 	protected Integer dni;
 
-	public Persona(String nombre, String apellido, Integer dni, Integer edad, LocalDate fechaNac) {
+	public Persona(String nombre, String apellido, Integer dni, LocalDate fechaNac) {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.dni = dni;
-		this.edad = edad;
 		this.fechaNac = fechaNac;
 	}
 
@@ -44,13 +42,7 @@ public abstract class Persona {
 		this.fechaNac = fechaNac;
 	}
 
-	public Integer getEdad() {
-		return edad;
-	}
-
-	public void setEdad(Integer edad) {
-		this.edad = edad;
-	}
+	
 
 	public Integer getDni() {
 		return dni;
@@ -83,8 +75,7 @@ public abstract class Persona {
 
 	@Override
 	public String toString() {
-		return "Persona [nombre=" + nombre + ", apellido=" + apellido + ", fechaNac=" + fechaNac + ", edad=" + edad
-				+ ", dni=" + dni + "]";
+		return "Persona [nombre=" + nombre + ", apellido=" + apellido + ", fechaNac=" + fechaNac + ", dni=" + dni + "]";
 	}
 
 }

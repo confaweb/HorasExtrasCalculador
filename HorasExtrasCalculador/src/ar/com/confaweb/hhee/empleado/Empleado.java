@@ -30,13 +30,12 @@ public class Empleado extends Persona implements HorasYLicencias {
 	private List<HoraExtra> registroDeHoras;
 	private List<Licencia> registroLicencias;
 
-	public Empleado(String nombre, String apellido, Integer dni, Integer edad, Integer registroEmpl, LocalDate fechaNac,
+	public Empleado(String nombre, String apellido, Integer dni, Integer registroEmpl, LocalDate fechaNac,
 			Categoria categoria, Double valorHora, LocalDate fechaIngreso) {
-		super(nombre, apellido, dni, edad, fechaNac);
+		super(nombre, apellido, dni, fechaNac);
 		super.nombre = nombre;
 		super.apellido = apellido;
 		super.dni = dni;
-		super.edad = edad;
 		super.fechaNac = this.fechaNac;
 		this.registroEmpl = registroEmpl;
 		this.categoria = categoria;
