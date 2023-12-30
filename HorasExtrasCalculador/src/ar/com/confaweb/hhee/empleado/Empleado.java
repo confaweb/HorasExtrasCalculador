@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeSet;
 
 import ar.com.confaweb.hhee.cuentasDeTiempo.Licencia;
 import ar.com.confaweb.hhee.dominio.HoraExtra;
@@ -21,7 +22,7 @@ import ar.com.confaweb.hhee.exceptions.NoSeRegistranHorasExtrasEnElMesException;
 import ar.com.confaweb.hhee.exceptions.NoSeRegistranHorasExtrasEnLaFechaException;
 import ar.com.confaweb.hhee.interfaces.HorasYLicencias;
 
-public class Empleado extends Persona implements HorasYLicencias{
+public class Empleado extends Persona implements HorasYLicencias,Comparable<Empleado> {
 	private final Double VALOR_HORA_BASICO = 1000.00;
 	private Integer registroEmpl;
 	private Categoria categoria;
@@ -29,6 +30,7 @@ public class Empleado extends Persona implements HorasYLicencias{
 	private LocalDate fechaIngreso;
 	private List<HoraExtra> registroDeHoras;
 	private List<Licencia> registroLicencias;
+	
 
 	public Empleado(String nombre, String apellido, Integer dni, Integer registroEmpl, LocalDate fechaNac,
 			Categoria categoria, Double valorHora, LocalDate fechaIngreso) {
@@ -43,6 +45,7 @@ public class Empleado extends Persona implements HorasYLicencias{
 		this.fechaIngreso = fechaIngreso;
 		this.registroDeHoras = new ArrayList<HoraExtra>();
 		this.registroLicencias = new ArrayList<Licencia>();
+		
 
 	}
 
@@ -93,6 +96,8 @@ public class Empleado extends Persona implements HorasYLicencias{
 	public Double getVALOR_HORA_BASICO() {
 		return VALOR_HORA_BASICO;
 	}
+
+	
 
 	public void setRegistroLicencias(List<Licencia> registroLicencias) {
 		this.registroLicencias = registroLicencias;
@@ -244,6 +249,53 @@ public class Empleado extends Persona implements HorasYLicencias{
 		return cantidad_Dias_Licencia;
 	}
 
+	public Integer calcularAntiguedad() {
+		Integer antiguedad = 0;
+		antiguedad = LocalDate.now().getYear() - this.fechaIngreso.getYear();
+		return antiguedad;
+	}
+
+	public Integer actualizarSaldoVacaciones() {
+
+		LocalDate fechaActualizacion = getFechaActualizacion();
+		Integer saldoActualizado = 0;
+		saldoActualizado = calcucarCantidadVacacionesSegunAnmatiguedad();
+
+		for (Licencia licencia : registroLicencias) {
+			if (licencia.getMotivo().equals(Motivo.VACACIONES))
+				saldoActualizado += licencia.getCantidad();
+		}
+
+		return saldoActualizado;
+	}
+
+	private LocalDate getFechaActualizacion() {
+		Integer anioActual = LocalDate.now().getYear();
+		LocalDate fechaActualizacion = LocalDate.of(anioActual, 10, 01);
+		return fechaActualizacion;
+	}
+
+	private Integer calcucarCantidadVacacionesSegunAnmatiguedad() {
+		Integer cantidad_Dias = 0, antiguedad = 0;
+		antiguedad = calcularAntiguedad();
+		if (antiguedad <= 1)
+			cantidad_Dias = 7;
+		else if (antiguedad > 1 && antiguedad <= 5)
+			cantidad_Dias = 14;
+		else if (antiguedad > 5 && antiguedad <= 10)
+			cantidad_Dias = 21;
+		else if (antiguedad > 10 && antiguedad <= 15)
+			cantidad_Dias = 28;
+		else
+
+			cantidad_Dias = 35;
+
+		return cantidad_Dias;
+
+	}
+
+	
+
 	@Override
 	public Integer calcularTotalHorasPorMes(LocalDate mes) {
 		// TODO Auto-generated method stub
@@ -331,53 +383,10 @@ public class Empleado extends Persona implements HorasYLicencias{
 		return valorHora;
 	}
 
-	public Integer calcularAntiguedad() {
-		Integer antiguedad = 0;
-		antiguedad = LocalDate.now().getYear() - this.fechaIngreso.getYear();
-		return antiguedad;
+	@Override
+	public int compareTo(Empleado e) {
+		
+		return this.registroEmpl-e.getRegistroEmpl();
 	}
-
-	public Integer actualizarSaldoVacaciones() {
-
-		LocalDate fechaActualizacion = getFechaActualizacion();
-		Integer saldoActualizado = 0;
-		saldoActualizado = calcucarCantidadVacacionesSegunAnmatiguedad();
-
-		for (Licencia licencia : registroLicencias) {
-			if (licencia.getMotivo().equals(Motivo.VACACIONES))
-				saldoActualizado += licencia.getCantidad();
-		}
-
-		return saldoActualizado;
-	}
-
-	private LocalDate getFechaActualizacion() {
-		Integer anioActual = LocalDate.now().getYear();
-		LocalDate fechaActualizacion = LocalDate.of(anioActual, 10, 01);
-		return fechaActualizacion;
-	}
-
-	private Integer calcucarCantidadVacacionesSegunAnmatiguedad() {
-		Integer cantidad_Dias = 0, antiguedad = 0;
-		antiguedad = calcularAntiguedad();
-		if (antiguedad <= 1)
-			cantidad_Dias = 7;
-		else if (antiguedad > 1 && antiguedad <= 5)
-			cantidad_Dias = 14;
-		else if (antiguedad > 5 && antiguedad <= 10)
-			cantidad_Dias = 21;
-		else if (antiguedad > 10 && antiguedad <= 15)
-			cantidad_Dias = 28;
-		else
-
-			cantidad_Dias = 35;
-
-		return cantidad_Dias;
-
-	}
-
-	
-
-	
 
 }

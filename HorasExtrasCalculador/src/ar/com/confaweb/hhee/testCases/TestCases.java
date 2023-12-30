@@ -11,6 +11,7 @@ import java.util.List;
 import org.junit.Test;
 
 import ar.com.confaweb.hhee.cuentasDeTiempo.Licencia;
+import ar.com.confaweb.hhee.dominio.Empresa;
 import ar.com.confaweb.hhee.dominio.HoraExtra;
 import ar.com.confaweb.hhee.empleado.Empleado;
 import ar.com.confaweb.hhee.empleado.Persona;
@@ -514,6 +515,59 @@ public class TestCases {
 
 
 	}
+	@Test // #14
+	public void queSePuedaObtenerListaNombreYApellidoEmpleadosOrdenadaYSinRepetidos() throws FaltaINgresarDatosDElEmpleadoException {
+//		PREPARACION
+
+		String  nombreEmp = "Julian", apellidoEmp = "Rooswell",descripcion = "descanso compensatorio",
+				descripcion_1="vacaciones",descripcion_2="baja medica", codigo = "dc01",razonSocial="Epsa";
+		Integer dni = 111111, registroEmpl = 000001,registroEmpl_1 = 000002,registroEmpl_2 = 000003, 
+				cantidad = 6, cantidad_1 =12, cantidad_2 =18, cantidad_3 =24,anioActual=LocalDate.now().getYear();
+		long cuit=1122222233;
+		Categoria categoria = Categoria.D;
+		Motivo motivo = Motivo.VACACIONES, motivo1 = Motivo.VACACIONES;
+		HoraTipo tipo = HoraTipo.DIURNA, tipo1 = HoraTipo.DIURNA;
+		Unidad unidad = Unidad.DIA_LABORAL;
+		LocalTime horaInicio = LocalTime.of(06, 00), horaFin = LocalTime.of(12, 00);
+		Double valorHora = 0.00;
+		LocalDate fecha = LocalDate.now(), fechaNac = LocalDate.of(2004, 10, 11),
+				fechaIngreso = LocalDate.of(2000, 01, 22), fechaHhee = LocalDate.of(22, 01, 10),
+				fechaHhee1 = LocalDate.of(22, 01, 11), fechaConsulta = LocalDate.of(22, 01, 11),
+				fechaActualizacion=LocalDate.of( anioActual, 10, 01);
+
+//		EJECUCION
+
+		Empresa empresa=new Empresa(razonSocial,cuit);
+		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria,
+				valorHora, fechaIngreso);
+		Persona empleado2 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl_1, fechaNac, categoria,
+				valorHora, fechaIngreso);
+		Persona empleado3 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl_2, fechaNac, categoria,
+				valorHora, fechaIngreso);
+		
+		empresa.registrarEmpleado(empleado1);
+		empresa.registrarEmpleado(empleado3);
+		empresa.registrarEmpleado(empleado2);
+		
+		
+		
+
+//		VALIDACION 
+
+	
+		assertTrue(empresa.getListadoEmpleados().contains(empleado1));
+		assertTrue(empresa.getListadoEmpleados().contains(empleado2));
+		assertTrue(empresa.getListadoEmpleados().contains(empleado3));
+		
+		Integer ve=registroEmpl;
+		Integer vo=empresa.getListadoEmpleados().iterator().next().getRegistroEmpl();
+		assertEquals(ve,vo);
+	
+		
+
+
+	}
+
 
 
 
