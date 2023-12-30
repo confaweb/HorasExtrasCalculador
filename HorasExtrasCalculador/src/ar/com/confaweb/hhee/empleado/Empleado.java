@@ -21,7 +21,7 @@ import ar.com.confaweb.hhee.exceptions.NoSeRegistranHorasExtrasEnElMesException;
 import ar.com.confaweb.hhee.exceptions.NoSeRegistranHorasExtrasEnLaFechaException;
 import ar.com.confaweb.hhee.interfaces.HorasYLicencias;
 
-public class Empleado extends Persona implements HorasYLicencias {
+public class Empleado extends Persona implements HorasYLicencias{
 	private final Double VALOR_HORA_BASICO = 1000.00;
 	private Integer registroEmpl;
 	private Categoria categoria;
@@ -375,5 +375,9 @@ public class Empleado extends Persona implements HorasYLicencias {
 		return cantidad_Dias;
 
 	}
+
+	
+
+	
 
 }

@@ -6,7 +6,7 @@ import java.time.LocalTime;
 import ar.com.confaweb.hhee.enums.HoraTipo;
 import ar.com.confaweb.hhee.enums.Motivo;
 
-public class HoraExtra {
+public class HoraExtra implements Comparable<HoraExtra> {
 
 	private Integer cantidadHhee;
 	private LocalDate fechaHhee;
@@ -76,6 +76,13 @@ public class HoraExtra {
 		Integer cantidad=0;
 		cantidad=(int) ((this.horaFin.getHour()-this.horaInicio.getHour())+.5);
 		return cantidad;
+	}
+
+
+	@Override
+	public int compareTo(HoraExtra hhee) {
+		
+		return this.cantidadHhee-hhee.getCantidadHhee();
 	}
 
 	

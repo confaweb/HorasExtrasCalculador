@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.Test;
@@ -413,38 +414,104 @@ public class TestCases {
 
 	}
 	@Test // #12
-	public void queSePuedaOrdenarListaEmpleadosPorApellido() {
+	public void queSePuedaOrdenarListaLicenciaPorDescripcion() {
 //		PREPARACION
 
-		String nombreEmp = "Julian", apellidoEmp = "Rooswell",apellidoEmp1 = "Sooswell",apellidoEmp2 = "Tooswell" ,descripcion = "descanso compensatorio", codigo = "dc01";
+		String  nombreEmp = "Julian", apellidoEmp = "Rooswell",descripcion = "descanso compensatorio",descripcion_1="vacaciones",descripcion_2="baja medica", codigo = "dc01";
 		Integer dni = 111111, registroEmpl = 000001, cantidad = 6,anioActual=LocalDate.now().getYear();
 		Categoria categoria = Categoria.D;
 		Motivo motivo = Motivo.VACACIONES, motivo1 = Motivo.VACACIONES;
 		HoraTipo tipo = HoraTipo.DIURNA, tipo1 = HoraTipo.DIURNA;
 		Unidad unidad = Unidad.DIA_LABORAL;
-		Double valorHora=0.0;
-		List <Empleado>registroEmpleados=new ArrayList<Empleado>();
-		
+		LocalTime horaInicio = LocalTime.of(06, 00), horaFin = LocalTime.of(12, 00);
+		Double valorHora = 0.00;
 		LocalDate fecha = LocalDate.now(), fechaNac = LocalDate.of(2004, 10, 11),
-				fechaIngreso = LocalDate.of(2000, 01, 22);
+				fechaIngreso = LocalDate.of(2000, 01, 22), fechaHhee = LocalDate.of(22, 01, 10),
+				fechaHhee1 = LocalDate.of(22, 01, 11), fechaConsulta = LocalDate.of(22, 01, 11),
+				fechaActualizacion=LocalDate.of( anioActual, 10, 01);
 
 //		EJECUCION
 
 		
 		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria,
 				valorHora, fechaIngreso);
-		Persona empleado2 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria,
-				valorHora, fechaIngreso);
-		Persona empleado3 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria,
-				valorHora, fechaIngreso);
-		//((Empleado) empleado1).ordenarListaEmpleados( registroEmpleados);
+		Licencia licencia = new Licencia(descripcion, codigo, cantidad, motivo, unidad);
+		Licencia licencia_1 = new Licencia(descripcion_1, codigo, cantidad, motivo, unidad);
+		Licencia licencia_2 = new Licencia(descripcion_2, codigo, cantidad, motivo, unidad);
+		
+		((Empleado)empleado1).registrarLicencia(licencia);
+		((Empleado)empleado1).registrarLicencia(licencia_1);
+		((Empleado)empleado1).registrarLicencia(licencia_2);
+		
+		Collections.sort(((Empleado)empleado1).getRegistroDeHoras());
 		
 
 //		VALIDACION 
 
-		Empleado ve = (Empleado) empleado1;
-		Empleado vo =  registroEmpleados.get(0);
+		String ve=descripcion_2;
+		String vo=((Empleado)empleado1).getRegistroLicencias().get(0).getDescripcion();
 		assertEquals(ve, vo);
+		String ve1=descripcion;
+		String vo1=((Empleado)empleado1).getRegistroLicencias().get(1).getDescripcion();
+		assertEquals(ve1, vo1);
+		String ve2=descripcion_1;
+		String vo2=((Empleado)empleado1).getRegistroLicencias().get(2).getDescripcion();
+		assertEquals(ve2, vo2);
+
+
+
+	}
+	@Test // #13
+	public void queSePuedaOrdenarListaHheePorCantidadDeMayorAMenor() {
+//		PREPARACION
+
+		String  nombreEmp = "Julian", apellidoEmp = "Rooswell",descripcion = "descanso compensatorio",descripcion_1="vacaciones",descripcion_2="baja medica", codigo = "dc01";
+		Integer dni = 111111, registroEmpl = 000001, cantidad = 6, cantidad_1 =12, cantidad_2 =18, cantidad_3 =24,anioActual=LocalDate.now().getYear();
+		Categoria categoria = Categoria.D;
+		Motivo motivo = Motivo.VACACIONES, motivo1 = Motivo.VACACIONES;
+		HoraTipo tipo = HoraTipo.DIURNA, tipo1 = HoraTipo.DIURNA;
+		Unidad unidad = Unidad.DIA_LABORAL;
+		LocalTime horaInicio = LocalTime.of(06, 00), horaFin = LocalTime.of(12, 00);
+		Double valorHora = 0.00;
+		LocalDate fecha = LocalDate.now(), fechaNac = LocalDate.of(2004, 10, 11),
+				fechaIngreso = LocalDate.of(2000, 01, 22), fechaHhee = LocalDate.of(22, 01, 10),
+				fechaHhee1 = LocalDate.of(22, 01, 11), fechaConsulta = LocalDate.of(22, 01, 11),
+				fechaActualizacion=LocalDate.of( anioActual, 10, 01);
+
+//		EJECUCION
+
+		
+		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria,
+				valorHora, fechaIngreso);
+		HoraExtra hhee = new HoraExtra(horaInicio, horaFin, fechaHhee, tipo, motivo, cantidad);
+		HoraExtra hhee_1 = new HoraExtra(horaInicio, horaFin, fechaHhee1, tipo1, motivo1, cantidad_1);
+		HoraExtra hhee_2 = new HoraExtra(horaInicio, horaFin, fechaHhee, tipo, motivo, cantidad_2);
+		HoraExtra hhee_3 = new HoraExtra(horaInicio, horaFin, fechaHhee1, tipo1, motivo1, cantidad_3);
+		
+		((Empleado)empleado1).registrarHhee(hhee);
+		((Empleado)empleado1).registrarHhee(hhee_1);;
+		((Empleado)empleado1).registrarHhee(hhee_2);
+		((Empleado)empleado1).registrarHhee(hhee_3);
+		
+		Collections.reverse(((Empleado)empleado1).getRegistroDeHoras());
+		
+
+//		VALIDACION 
+
+		Integer ve=cantidad_3;
+		Integer vo=((Empleado)empleado1).getRegistroDeHoras().get(0).getCantidadHhee();
+		assertEquals(ve, vo);
+		Integer ve1=cantidad_2;
+		Integer vo1=((Empleado)empleado1).getRegistroDeHoras().get(1).getCantidadHhee();
+		assertEquals(ve1, vo1);
+		Integer ve2=cantidad_1;
+		Integer vo2=((Empleado)empleado1).getRegistroDeHoras().get(2).getCantidadHhee();
+		assertEquals(ve2, vo2);
+		Integer ve3=cantidad;
+		Integer vo3=((Empleado)empleado1).getRegistroDeHoras().get(3).getCantidadHhee();
+		assertEquals(ve3, vo3);
+
+
 
 	}
 

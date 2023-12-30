@@ -5,7 +5,7 @@ import java.util.List;
 import ar.com.confaweb.hhee.enums.Motivo;
 import ar.com.confaweb.hhee.enums.Unidad;
 
-public class Licencia {
+public class Licencia implements Comparable<Licencia>{
 	private String descripcion;
 	private String codigo;
 	private Integer cantidad;
@@ -67,6 +67,11 @@ public class Licencia {
 		cantidadActual=this.getCantidad()+cantidad;
 		this.setCantidad(cantidadActual);
 		
+	}
+	@Override
+	public int compareTo(Licencia l) {
+		
+		return this.descripcion.compareTo(l.getDescripcion());
 	}
 
 	
