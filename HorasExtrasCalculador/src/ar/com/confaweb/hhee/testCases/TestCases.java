@@ -41,8 +41,8 @@ public class TestCases {
 		LocalTime horaInicio = LocalTime.of(06, 00), horaFin = LocalTime.of(12, 00);
 //		EJECUCION
 		HoraExtra hhee = new HoraExtra(horaInicio, horaFin, fechaHhee, tipo, motivo, cantidadHhee);
-		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria,
-				valorHora, fechaIngreso);
+		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria, valorHora,
+				fechaIngreso);
 		((Empleado) empleado1).registrarHhee(hhee);
 
 //		VALIDACION
@@ -67,8 +67,8 @@ public class TestCases {
 //		EJECUCION
 		HoraExtra hhee = new HoraExtra(horaInicio, horaFin, fechaHhee, tipo, motivo, cantidadHhee);
 		HoraExtra hhee1 = new HoraExtra(horaInicio, horaFin, fechaHhee1, tipo1, motivo1, cantidadHhee);
-		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria,
-				valorHora, fechaIngreso);
+		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria, valorHora,
+				fechaIngreso);
 		// ArrayList<HoraExtra> registroHhee=new ArrayList<HoraExtra>();
 		((Empleado) empleado1).registrarHhee(hhee);
 		((Empleado) empleado1).registrarHhee(hhee1);
@@ -100,8 +100,8 @@ public class TestCases {
 //		EJECUCION
 		HoraExtra hhee = new HoraExtra(horaInicio, horaFin, fechaHhee, tipo, motivo, cantidad);
 		HoraExtra hhee1 = new HoraExtra(horaInicio, horaFin, fechaHhee1, tipo1, motivo1, cantidad);
-		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria,
-				valorHora, fechaIngreso);
+		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria, valorHora,
+				fechaIngreso);
 		Licencia licencia = new Licencia(descripcion, codigo, cantidad, motivo, unidad);
 		// ArrayList<HoraExtra> registroHhee=new ArrayList<HoraExtra>();
 		((Empleado) empleado1).registrarLicencia(licencia);
@@ -130,8 +130,8 @@ public class TestCases {
 //		EJECUCION
 		HoraExtra hhee = new HoraExtra(horaInicio, horaFin, fechaHhee, tipo, motivo, cantidad);
 		HoraExtra hhee1 = new HoraExtra(horaInicio, horaFin, fechaHhee1, tipo1, motivo1, cantidad);
-		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria,
-				valorHora, fechaIngreso);
+		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria, valorHora,
+				fechaIngreso);
 
 		((Empleado) empleado1).registrarHhee(hhee1);
 		((Empleado) empleado1).consultarHHEEPorFecha(fechaConsulta);
@@ -162,8 +162,8 @@ public class TestCases {
 //		EJECUCION
 		HoraExtra hhee = new HoraExtra(horaInicio, horaFin, fechaHhee, tipo, motivo, cantidad);
 		HoraExtra hhee1 = new HoraExtra(horaInicio, horaFin, fechaHhee1, tipo1, motivo1, cantidad);
-		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria,
-				valorHora, fechaIngreso);
+		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria, valorHora,
+				fechaIngreso);
 
 //		VALIDACION 
 		assertTrue(((Empleado) empleado1).datosValidados());
@@ -189,8 +189,8 @@ public class TestCases {
 //		EJECUCION
 		HoraExtra hhee = new HoraExtra(horaInicio, horaFin, fechaHhee, tipo, motivo, cantidad);
 		HoraExtra hhee1 = new HoraExtra(horaInicio, horaFin, fechaHhee1, tipo1, motivo1, cantidad);
-		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria,
-				valorHora, fechaIngreso);
+		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria, valorHora,
+				fechaIngreso);
 
 		Licencia licencia = new Licencia(descripcion, codigo, cantidad, motivo, unidad);
 
@@ -206,7 +206,8 @@ public class TestCases {
 	}
 
 	@Test // #8
-	public void QueSePuedaConsumirLicenciaYAjusteSaldo_LanzaExcepcionSiSeQuiereConsumirlicenciaSinSaldo() throws LicenciaSinSaldoException, CantidadLicenciaSolicitadaMayorASaldoException {
+	public void QueSePuedaConsumirLicenciaYAjusteSaldo_LanzaExcepcionSiSeQuiereConsumirlicenciaSinSaldo()
+			throws LicenciaSinSaldoException, CantidadLicenciaSolicitadaMayorASaldoException {
 //		PREPARACION
 
 		String nombreEmp = "Julian", apellidoEmp = "Rooswell", descripcion = "descanso compensatorio", codigo = "dc01";
@@ -220,20 +221,19 @@ public class TestCases {
 		LocalDate fecha = LocalDate.now(), fechaNac = LocalDate.of(2004, 10, 11),
 				fechaIngreso = LocalDate.of(2021, 01, 22), fechaHhee = LocalDate.of(22, 01, 10),
 				fechaHhee1 = LocalDate.of(22, 01, 11), fechaConsulta = LocalDate.of(22, 01, 11),
-				fechaInicioLicencia=LocalDate.of(2022, 02, 15),fechaFinLicencia=LocalDate.of(2022, 02, 18);
-		
+				fechaInicioLicencia = LocalDate.of(2022, 02, 15), fechaFinLicencia = LocalDate.of(2022, 02, 18);
 
 //		EJECUCION
 		HoraExtra hhee = new HoraExtra(horaInicio, horaFin, fechaHhee, tipo, motivo, cantidad);
 		HoraExtra hhee1 = new HoraExtra(horaInicio, horaFin, fechaHhee1, tipo1, motivo1, cantidad);
-		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria,
-				valorHora, fechaIngreso);
+		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria, valorHora,
+				fechaIngreso);
 
 		Licencia licencia = new Licencia(descripcion, codigo, cantidad, motivo, unidad);
 
 		((Empleado) empleado1).registrarHhee(hhee);
 		((Empleado) empleado1).registrarLicencia(licencia);
-		((Empleado) empleado1).consumirLicencia(motivo,fechaInicioLicencia,fechaFinLicencia);
+		((Empleado) empleado1).consumirLicencia(motivo, fechaInicioLicencia, fechaFinLicencia);
 
 //		VALIDACION 
 		Integer ve = 3;
@@ -263,8 +263,8 @@ public class TestCases {
 //			EJECUCION
 		HoraExtra hhee = new HoraExtra(horaInicio, horaFin, fechaHhee, tipo, motivo, cantidad);
 		HoraExtra hhee1 = new HoraExtra(horaInicio, horaFin, fechaHhee1, tipo1, motivo1, cantidad);
-		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria,
-				valorHora, fechaIngreso);
+		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria, valorHora,
+				fechaIngreso);
 
 		Licencia licencia = new Licencia(descripcion, codigo, cantidad, motivo, unidad);
 
@@ -302,8 +302,8 @@ public class TestCases {
 //			EJECUCION
 		HoraExtra hhee = new HoraExtra(horaInicio, horaFin, fechaHhee, tipo, motivo, cantidad);
 		HoraExtra hhee1 = new HoraExtra(horaInicio, horaFin, fechaHhee1, tipo1, motivo1, cantidad);
-		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria,
-				valorHora, fechaIngreso);
+		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria, valorHora,
+				fechaIngreso);
 
 		Licencia licencia = new Licencia(descripcion, codigo, cantidad, motivo, unidad);
 
@@ -339,8 +339,8 @@ public class TestCases {
 
 		HoraExtra hhee = new HoraExtra(horaInicio, horaFin, fechaHhee, tipo, motivo, cantidad);
 		HoraExtra hhee1 = new HoraExtra(horaInicio, horaFin, fechaHhee1, tipo1, motivo1, cantidad);
-		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria,
-				valorHora, fechaIngreso);
+		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria, valorHora,
+				fechaIngreso);
 		Licencia licencia = new Licencia(descripcion, codigo, cantidad, motivo, unidad);
 
 //		VALIDACION 
@@ -350,6 +350,7 @@ public class TestCases {
 		assertEquals(ve, vo, .01);
 
 	}
+
 	@Test // #11
 	public void queSePuedaCalcularAntiguedad() {
 //		PREPARACION
@@ -368,9 +369,8 @@ public class TestCases {
 
 //		EJECUCION
 
-		
-		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria,
-				valorHora, fechaIngreso);
+		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria, valorHora,
+				fechaIngreso);
 		Licencia licencia = new Licencia(descripcion, codigo, cantidad, motivo, unidad);
 
 //		VALIDACION 
@@ -386,7 +386,7 @@ public class TestCases {
 //		PREPARACION
 
 		String nombreEmp = "Julian", apellidoEmp = "Rooswell", descripcion = "descanso compensatorio", codigo = "dc01";
-		Integer dni = 111111, registroEmpl = 000001, cantidad = 6,anioActual=LocalDate.now().getYear();
+		Integer dni = 111111, registroEmpl = 000001, cantidad = 6, anioActual = LocalDate.now().getYear();
 		Categoria categoria = Categoria.D;
 		Motivo motivo = Motivo.VACACIONES, motivo1 = Motivo.VACACIONES;
 		HoraTipo tipo = HoraTipo.DIURNA, tipo1 = HoraTipo.DIURNA;
@@ -396,16 +396,15 @@ public class TestCases {
 		LocalDate fecha = LocalDate.now(), fechaNac = LocalDate.of(2004, 10, 11),
 				fechaIngreso = LocalDate.of(2000, 01, 22), fechaHhee = LocalDate.of(22, 01, 10),
 				fechaHhee1 = LocalDate.of(22, 01, 11), fechaConsulta = LocalDate.of(22, 01, 11),
-				fechaActualizacion=LocalDate.of( anioActual, 10, 01);
+				fechaActualizacion = LocalDate.of(anioActual, 10, 01);
 
 //		EJECUCION
 
 		HoraExtra hhee = new HoraExtra(horaInicio, horaFin, fechaHhee, tipo, motivo, cantidad);
 		HoraExtra hhee1 = new HoraExtra(horaInicio, horaFin, fechaHhee1, tipo1, motivo1, cantidad);
-		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria,
-				valorHora, fechaIngreso);
+		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria, valorHora,
+				fechaIngreso);
 		Licencia licencia = new Licencia(descripcion, codigo, cantidad, motivo, unidad);
-		
 
 //		VALIDACION 
 
@@ -414,12 +413,14 @@ public class TestCases {
 		assertEquals(ve, vo);
 
 	}
+
 	@Test // #12
 	public void queSePuedaOrdenarListaLicenciaPorDescripcion() {
 //		PREPARACION
 
-		String  nombreEmp = "Julian", apellidoEmp = "Rooswell",descripcion = "descanso compensatorio",descripcion_1="vacaciones",descripcion_2="baja medica", codigo = "dc01";
-		Integer dni = 111111, registroEmpl = 000001, cantidad = 6,anioActual=LocalDate.now().getYear();
+		String nombreEmp = "Julian", apellidoEmp = "Rooswell", descripcion = "descanso compensatorio",
+				descripcion_1 = "vacaciones", descripcion_2 = "baja medica", codigo = "dc01";
+		Integer dni = 111111, registroEmpl = 000001, cantidad = 6, anioActual = LocalDate.now().getYear();
 		Categoria categoria = Categoria.D;
 		Motivo motivo = Motivo.VACACIONES, motivo1 = Motivo.VACACIONES;
 		HoraTipo tipo = HoraTipo.DIURNA, tipo1 = HoraTipo.DIURNA;
@@ -429,45 +430,44 @@ public class TestCases {
 		LocalDate fecha = LocalDate.now(), fechaNac = LocalDate.of(2004, 10, 11),
 				fechaIngreso = LocalDate.of(2000, 01, 22), fechaHhee = LocalDate.of(22, 01, 10),
 				fechaHhee1 = LocalDate.of(22, 01, 11), fechaConsulta = LocalDate.of(22, 01, 11),
-				fechaActualizacion=LocalDate.of( anioActual, 10, 01);
+				fechaActualizacion = LocalDate.of(anioActual, 10, 01);
 
 //		EJECUCION
 
-		
-		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria,
-				valorHora, fechaIngreso);
+		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria, valorHora,
+				fechaIngreso);
 		Licencia licencia = new Licencia(descripcion, codigo, cantidad, motivo, unidad);
 		Licencia licencia_1 = new Licencia(descripcion_1, codigo, cantidad, motivo, unidad);
 		Licencia licencia_2 = new Licencia(descripcion_2, codigo, cantidad, motivo, unidad);
-		
-		((Empleado)empleado1).registrarLicencia(licencia);
-		((Empleado)empleado1).registrarLicencia(licencia_1);
-		((Empleado)empleado1).registrarLicencia(licencia_2);
-		
-		Collections.sort(((Empleado)empleado1).getRegistroDeHoras());
-		
+
+		((Empleado) empleado1).registrarLicencia(licencia);
+		((Empleado) empleado1).registrarLicencia(licencia_1);
+		((Empleado) empleado1).registrarLicencia(licencia_2);
+
+		Collections.sort(((Empleado) empleado1).getRegistroDeHoras());
 
 //		VALIDACION 
 
-		String ve=descripcion_2;
-		String vo=((Empleado)empleado1).getRegistroLicencias().get(0).getDescripcion();
+		String ve = descripcion_2;
+		String vo = ((Empleado) empleado1).getRegistroLicencias().get(0).getDescripcion();
 		assertEquals(ve, vo);
-		String ve1=descripcion;
-		String vo1=((Empleado)empleado1).getRegistroLicencias().get(1).getDescripcion();
+		String ve1 = descripcion;
+		String vo1 = ((Empleado) empleado1).getRegistroLicencias().get(1).getDescripcion();
 		assertEquals(ve1, vo1);
-		String ve2=descripcion_1;
-		String vo2=((Empleado)empleado1).getRegistroLicencias().get(2).getDescripcion();
+		String ve2 = descripcion_1;
+		String vo2 = ((Empleado) empleado1).getRegistroLicencias().get(2).getDescripcion();
 		assertEquals(ve2, vo2);
 
-
-
 	}
+
 	@Test // #13
 	public void queSePuedaOrdenarListaHheePorCantidadDeMayorAMenor() {
 //		PREPARACION
 
-		String  nombreEmp = "Julian", apellidoEmp = "Rooswell",descripcion = "descanso compensatorio",descripcion_1="vacaciones",descripcion_2="baja medica", codigo = "dc01";
-		Integer dni = 111111, registroEmpl = 000001, cantidad = 6, cantidad_1 =12, cantidad_2 =18, cantidad_3 =24,anioActual=LocalDate.now().getYear();
+		String nombreEmp = "Julian", apellidoEmp = "Rooswell", descripcion = "descanso compensatorio",
+				descripcion_1 = "vacaciones", descripcion_2 = "baja medica", codigo = "dc01";
+		Integer dni = 111111, registroEmpl = 000001, cantidad = 6, cantidad_1 = 12, cantidad_2 = 18, cantidad_3 = 24,
+				anioActual = LocalDate.now().getYear();
 		Categoria categoria = Categoria.D;
 		Motivo motivo = Motivo.VACACIONES, motivo1 = Motivo.VACACIONES;
 		HoraTipo tipo = HoraTipo.DIURNA, tipo1 = HoraTipo.DIURNA;
@@ -477,53 +477,52 @@ public class TestCases {
 		LocalDate fecha = LocalDate.now(), fechaNac = LocalDate.of(2004, 10, 11),
 				fechaIngreso = LocalDate.of(2000, 01, 22), fechaHhee = LocalDate.of(22, 01, 10),
 				fechaHhee1 = LocalDate.of(22, 01, 11), fechaConsulta = LocalDate.of(22, 01, 11),
-				fechaActualizacion=LocalDate.of( anioActual, 10, 01);
+				fechaActualizacion = LocalDate.of(anioActual, 10, 01);
 
 //		EJECUCION
 
-		
-		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria,
-				valorHora, fechaIngreso);
+		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria, valorHora,
+				fechaIngreso);
 		HoraExtra hhee = new HoraExtra(horaInicio, horaFin, fechaHhee, tipo, motivo, cantidad);
 		HoraExtra hhee_1 = new HoraExtra(horaInicio, horaFin, fechaHhee1, tipo1, motivo1, cantidad_1);
 		HoraExtra hhee_2 = new HoraExtra(horaInicio, horaFin, fechaHhee, tipo, motivo, cantidad_2);
 		HoraExtra hhee_3 = new HoraExtra(horaInicio, horaFin, fechaHhee1, tipo1, motivo1, cantidad_3);
-		
-		((Empleado)empleado1).registrarHhee(hhee);
-		((Empleado)empleado1).registrarHhee(hhee_1);;
-		((Empleado)empleado1).registrarHhee(hhee_2);
-		((Empleado)empleado1).registrarHhee(hhee_3);
-		
-		Collections.reverse(((Empleado)empleado1).getRegistroDeHoras());
-		
+
+		((Empleado) empleado1).registrarHhee(hhee);
+		((Empleado) empleado1).registrarHhee(hhee_1);
+		;
+		((Empleado) empleado1).registrarHhee(hhee_2);
+		((Empleado) empleado1).registrarHhee(hhee_3);
+
+		Collections.reverse(((Empleado) empleado1).getRegistroDeHoras());
 
 //		VALIDACION 
 
-		Integer ve=cantidad_3;
-		Integer vo=((Empleado)empleado1).getRegistroDeHoras().get(0).getCantidadHhee();
+		Integer ve = cantidad_3;
+		Integer vo = ((Empleado) empleado1).getRegistroDeHoras().get(0).getCantidadHhee();
 		assertEquals(ve, vo);
-		Integer ve1=cantidad_2;
-		Integer vo1=((Empleado)empleado1).getRegistroDeHoras().get(1).getCantidadHhee();
+		Integer ve1 = cantidad_2;
+		Integer vo1 = ((Empleado) empleado1).getRegistroDeHoras().get(1).getCantidadHhee();
 		assertEquals(ve1, vo1);
-		Integer ve2=cantidad_1;
-		Integer vo2=((Empleado)empleado1).getRegistroDeHoras().get(2).getCantidadHhee();
+		Integer ve2 = cantidad_1;
+		Integer vo2 = ((Empleado) empleado1).getRegistroDeHoras().get(2).getCantidadHhee();
 		assertEquals(ve2, vo2);
-		Integer ve3=cantidad;
-		Integer vo3=((Empleado)empleado1).getRegistroDeHoras().get(3).getCantidadHhee();
+		Integer ve3 = cantidad;
+		Integer vo3 = ((Empleado) empleado1).getRegistroDeHoras().get(3).getCantidadHhee();
 		assertEquals(ve3, vo3);
 
-
-
 	}
+
 	@Test // #14
-	public void queSePuedaObtenerListaNombreYApellidoEmpleadosOrdenadaYSinRepetidos() throws FaltaINgresarDatosDElEmpleadoException {
+	public void queSePuedaObtenerListaNombreYApellidoEmpleadosOrdenadaYSinRepetidos()
+			throws FaltaINgresarDatosDElEmpleadoException {
 //		PREPARACION
 
-		String  nombreEmp = "Julian", apellidoEmp = "Rooswell",descripcion = "descanso compensatorio",
-				descripcion_1="vacaciones",descripcion_2="baja medica", codigo = "dc01",razonSocial="Epsa";
-		Integer dni = 111111, registroEmpl = 000001,registroEmpl_1 = 000002,registroEmpl_2 = 000003, 
-				cantidad = 6, cantidad_1 =12, cantidad_2 =18, cantidad_3 =24,anioActual=LocalDate.now().getYear();
-		long cuit=1122222233;
+		String nombreEmp = "Julian", apellidoEmp = "Rooswell", descripcion = "descanso compensatorio",
+				descripcion_1 = "vacaciones", descripcion_2 = "baja medica", codigo = "dc01", razonSocial = "Epsa";
+		Integer dni = 111111, registroEmpl = 000001, registroEmpl_1 = 000002, registroEmpl_2 = 000003, cantidad = 6,
+				cantidad_1 = 12, cantidad_2 = 18, cantidad_3 = 24, anioActual = LocalDate.now().getYear();
+		long cuit = 1122222233;
 		Categoria categoria = Categoria.D;
 		Motivo motivo = Motivo.VACACIONES, motivo1 = Motivo.VACACIONES;
 		HoraTipo tipo = HoraTipo.DIURNA, tipo1 = HoraTipo.DIURNA;
@@ -533,42 +532,40 @@ public class TestCases {
 		LocalDate fecha = LocalDate.now(), fechaNac = LocalDate.of(2004, 10, 11),
 				fechaIngreso = LocalDate.of(2000, 01, 22), fechaHhee = LocalDate.of(22, 01, 10),
 				fechaHhee1 = LocalDate.of(22, 01, 11), fechaConsulta = LocalDate.of(22, 01, 11),
-				fechaActualizacion=LocalDate.of( anioActual, 10, 01);
+				fechaActualizacion = LocalDate.of(anioActual, 10, 01);
 
 //		EJECUCION
 
-		Empresa empresa=new Empresa(razonSocial,cuit);
-		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria,
-				valorHora, fechaIngreso);
-		Persona empleado2 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl_1, fechaNac, categoria,
-				valorHora, fechaIngreso);
-		Persona empleado3 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl_2, fechaNac, categoria,
-				valorHora, fechaIngreso);
-		
+		Empresa empresa = new Empresa(razonSocial, cuit);
+		Persona empleado1 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl, fechaNac, categoria, valorHora,
+				fechaIngreso);
+		Persona empleado2 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl_1, fechaNac, categoria, valorHora,
+				fechaIngreso);
+		Persona empleado3 = new Empleado(nombreEmp, apellidoEmp, dni, registroEmpl_2, fechaNac, categoria, valorHora,
+				fechaIngreso);
+
 		empresa.registrarEmpleado(empleado1);
 		empresa.registrarEmpleado(empleado3);
 		empresa.registrarEmpleado(empleado2);
 		
-		
-		
+		Integer s=empresa.getListadoEmpleados().size();
+		Empleado arrayEmp[]= new Empleado[s];
+		arrayEmp= empresa.getListadoEmpleados().toArray(arrayEmp);
 
 //		VALIDACION 
 
-	
 		assertTrue(empresa.getListadoEmpleados().contains(empleado1));
 		assertTrue(empresa.getListadoEmpleados().contains(empleado2));
 		assertTrue(empresa.getListadoEmpleados().contains(empleado3));
-		
-		Integer ve=registroEmpl;
-		Integer vo=empresa.getListadoEmpleados().iterator().next().getRegistroEmpl();
-		assertEquals(ve,vo);
-	
-		
 
+		Integer ve = registroEmpl_1;
+		Integer vo = arrayEmp[1].getRegistroEmpl();
+		assertEquals(ve, vo);
+
+//		for (Empleado e : empresa.getListadoEmpleados()) {
+//			System.out.println(e.getNombre());
+//		}
 
 	}
-
-
-
 
 }
